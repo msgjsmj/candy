@@ -21,7 +21,8 @@ Candy.View.Template = (function(self){
 	};
 
 	self.Chat = {
-		pane: '<div id="chat-pane">{{> tabs}}{{> toolbar}}{{> rooms}}</div>{{> modal}}',
+		//pane: '<div id="chat-pane">{{> tabs}}{{> toolbar}}{{> rooms}}</div>{{> modal}}',
+    pane: '<div id="chat-pane">{{> rooms}}</div>',
 		rooms: '<div id="chat-rooms" class="rooms"></div>',
 		tabs: '<ul id="chat-tabs"></ul>',
 		tab: '<li class="roomtype-{{roomType}}" data-roomjid="{{roomJid}}" data-roomtype="{{roomType}}"><a href="#" class="label">{{#privateUserChat}}@{{/privateUserChat}}{{name}}</a><a href="#" class="transition"></a><a href="#" class="close">\u00D7</a><small class="unread"></small></li>',
@@ -44,7 +45,8 @@ Candy.View.Template = (function(self){
 	};
 
 	self.Room = {
-		pane: '<div class="room-pane roomtype-{{roomType}}" id="chat-room-{{roomId}}" data-roomjid="{{roomJid}}" data-roomtype="{{roomType}}">{{> roster}}{{> messages}}{{> form}}</div>',
+    //pane: '<div class="room-pane roomtype-{{roomType}}" id="chat-room-{{roomId}}" data-roomjid="{{roomJid}}" data-roomtype="{{roomType}}">{{> roster}}{{> messages}}{{> form}}</div>',
+    pane: '<div class="room-pane roomtype-{{roomType}}" id="chat-room-{{roomId}}" data-roomjid="{{roomJid}}" data-roomtype="{{roomType}}">{{> messages}}{{> form}}</div>',
 		subject: '<dt>{{time}}</dt><dd class="subject"><span class="label">{{roomName}}</span>{{_roomSubject}} {{subject}}</dd>',
 		form: '<div class="message-form-wrapper"></div><form method="post" class="message-form"><input name="message" class="field" type="text" autocomplete="off" maxlength="1000" /><input type="submit" class="submit" name="submit" value="{{_messageSubmit}}" /></form>'
 	};
@@ -56,8 +58,8 @@ Candy.View.Template = (function(self){
 
 	self.Message = {
 		pane: '<div class="message-pane-wrapper"><dl class="message-pane"></dl></div>',
-		item: '<dt>{{time}}</dt><dd><span class="label"><a href="#" class="name">{{displayName}}</a></span>{{{message}}}</dd>'
-	};
+		item: '<div class={{owner}}><dt>{{time}}</dt><dd><span class="label"><a href="#" class="name">{{displayName}}</a></span>{{{message}}}</dd></div>'
+  };
 
 	self.Login = {
 		form: '<form method="post" id="login-form" class="login-form">'
@@ -66,7 +68,7 @@ Candy.View.Template = (function(self){
 			+ '{{#displayPassword}}<label for="password">{{_labelPassword}}</label><input type="password" id="password" name="password" />{{/displayPassword}}'
 			+ '<input type="submit" class="button" value="{{_loginSubmit}}" /></form>'
 	};
-	
+
 	self.PresenceError = {
 		enterPasswordForm: '<strong>{{_label}}</strong>'
 			+ '<form method="post" id="enter-password-form" class="enter-password-form">'

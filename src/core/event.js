@@ -387,7 +387,7 @@ Candy.Core.Event = (function(self, Strophe, $, observable) {
 				self.notifyObservers(self.KEYS.PRESENCE, {'roomJid': roomJid, 'roomName': room.getName(), 'user': user, 'action': action, 'currentUser': Candy.Core.getUser() } );
 				return true;
 			},
-			
+
 			/** Function: PresenceError
 			 * Acts when a presence of type error has been retrieved.
 			 *
@@ -403,10 +403,10 @@ Candy.Core.Event = (function(self, Strophe, $, observable) {
 					roomJid = Strophe.getBareJidFromJid(from),
 					room = Candy.Core.getRooms()[roomJid],
 					roomName = room.getName();
-					
+
 				// Presence error: Remove room from array to prevent error when disconnecting
 				delete room;
-				
+
 				self.notifyObservers(self.KEYS.PRESENCE_ERROR, {'msg' : msg, 'type': msg.children('error').children()[0].tagName.toLowerCase(), 'roomJid': roomJid, 'roomName': roomName});
 			},
 
@@ -443,7 +443,8 @@ Candy.Core.Event = (function(self, Strophe, $, observable) {
 							// if a 3rd-party client sends a direct message to this user (not via the room) then the username is the node and not the resource.
 							isNoConferenceRoomJid = !Candy.Core.getRoom(bareRoomJid),
 							name = isNoConferenceRoomJid ? Strophe.getNodeFromJid(roomJid) : Strophe.getResourceFromJid(roomJid);
-						message = { name: name, body: msg.children('body').text(), type: msg.attr('type'), isNoConferenceRoomJid: isNoConferenceRoomJid };
+            var receiverName = Strophe.getNodeFromJid(msg.attr('to'));
+						message = { name: name, receiverName: receiverName, body: msg.children('body').text(), type: msg.attr('type'), isNoConferenceRoomJid: isNoConferenceRoomJid };
 					// Multi-user chat message
 					} else {
 						roomJid = Candy.Util.unescapeJid(Strophe.getBareJidFromJid(msg.attr('from')));
@@ -451,7 +452,8 @@ Candy.Core.Event = (function(self, Strophe, $, observable) {
 						// Message from a user
 						if(resource) {
 							resource = Strophe.unescapeNode(resource);
-							message = { name: resource, body: msg.children('body').text(), type: msg.attr('type') };
+              var receiverName = Strophe.getNodeFromJid(msg.attr('to'));
+							message = { name: resource, receiverName: receiverName, body: msg.children('body').text(), type: msg.attr('type') };
 						// Message from server (XEP-0045#registrar-statuscodes)
 						} else {
 							// we are not yet present in the room, let's just drop this message (issue #105)

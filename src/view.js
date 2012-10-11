@@ -102,7 +102,7 @@ Candy.View = (function(self, $) {
 	self.init = function(container, options) {
 		$.extend(true, _options, options);
 		_setupTranslation(_options.language);
-		
+
 		// Set path to emoticons
 		Candy.Util.Parser.setEmoticonPath(this.getOptions().resources + 'img/emoticons/');
 
@@ -117,16 +117,16 @@ Candy.View = (function(self, $) {
 			tooltipUsercount : $.i18n._('tooltipUsercount'),
 			resourcesPath : this.getOptions().resources
 		}, {
-			tabs: Candy.View.Template.Chat.tabs,
-			rooms: Candy.View.Template.Chat.rooms,
-			modal: Candy.View.Template.Chat.modal,
-			toolbar: Candy.View.Template.Chat.toolbar,
-			soundcontrol: Candy.View.Template.Chat.soundcontrol
+      //tabs: Candy.View.Template.Chat.tabs,
+			rooms: Candy.View.Template.Chat.rooms
+      //modal: Candy.View.Template.Chat.modal,
+      //toolbar: Candy.View.Template.Chat.toolbar,
+      //soundcontrol: Candy.View.Template.Chat.soundcontrol
 		}));
 
 		// ... and let the elements dance.
 		_registerWindowHandlers();
-		_initToolbar();
+		//_initToolbar();
 		_registerObservers();
 		_delegateTooltips();
 	};

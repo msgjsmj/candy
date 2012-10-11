@@ -545,7 +545,7 @@ Candy.View.Pane = (function(self, $) {
 			 */
 			hide: function(callback) {
 				$('#chat-modal').fadeOut('fast', function() {
-					$('#chat-modal-body').text('');	
+					$('#chat-modal-body').text('');
 					$('#chat-modal-overlay').hide();
 				});
 				// restore initial esc handling
@@ -640,7 +640,7 @@ Candy.View.Pane = (function(self, $) {
 					return false;
 				});
 			},
-			
+
 			/** Function: showEnterPasswordForm
 			 * Shows a form for entering room password
 			 *
@@ -657,18 +657,18 @@ Candy.View.Pane = (function(self, $) {
 					_joinSubmit: $.i18n._('enterRoomPasswordSubmit')
 				}), true);
 				$('#password').focus();
-				
+
 				// register submit handler
 				$('#enter-password-form').submit(function() {
 					var password = $('#password').val();
-					
+
 					self.Chat.Modal.hide(function() {
 						Candy.Core.Action.Jabber.Room.Join(roomJid, password);
 					});
 					return false;
 				});
 			},
-			
+
 			/** Function: showNicknameConflictForm
 			 * Shows a form indicating that the nickname is already taken and
 			 * for chosing a new nickname
@@ -683,7 +683,7 @@ Candy.View.Pane = (function(self, $) {
 					_loginSubmit: $.i18n._('loginSubmit')
 				}));
 				$('#nickname').focus();
-				
+
 				// register submit handler
 				$('#nickname-conflict-form').submit(function() {
 					var nickname = $('#nickname').val();
@@ -695,7 +695,7 @@ Candy.View.Pane = (function(self, $) {
 					return false;
 				});
 			},
-			
+
 			/** Function: showError
 			 * Show modal containing error message
 			 *
@@ -1617,15 +1617,24 @@ Candy.View.Pane = (function(self, $) {
 		 *   (String) message - Message
 		 *   (String) timestamp - [optional] Timestamp of the message, if not present, current date.
 		 */
-		show: function(roomJid, name, message, timestamp) {
+		show: function(roomJid, name, message, timestamp, receiverName) {
 			message = Candy.Util.Parser.all(message.substring(0, Candy.View.getOptions().crop.message.body));
 			message = Candy.View.Event.Message.beforeShow({'roomJid': roomJid, 'nick': name, 'message': message});
 			if(!message) {
 				return;
 			}
 
+      console.log(receiverName);
+      var owner = function() {
+        if (receiverName === name) {
+          return 'owner';
+        } else {
+          return 'other';
+        }
+      };
 			var html = Mustache.to_html(Candy.View.Template.Message.item, {
-				name: name,
+        owner: owner,
+        name: name,
 				displayName: Candy.Util.crop(name, Candy.View.getOptions().crop.message.nickname),
 				message: message,
 				time: Candy.Util.localizedTime(timestamp || new Date().toGMTString())
