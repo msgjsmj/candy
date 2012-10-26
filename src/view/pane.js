@@ -1625,20 +1625,32 @@ Candy.View.Pane = (function(self, $) {
 			}
 
       console.log(receiverName);
-      var owner = function() {
+      var who = function() {
         if (receiverName === name) {
-          return 'owner';
+          return 'my';
         } else {
-          return 'other';
+          return 'ur';
         }
-      };
+      }();
+
+      if (who === 'ur') {
 			var html = Mustache.to_html(Candy.View.Template.Message.item, {
-        owner: owner,
+        who: who,
         name: name,
 				displayName: Candy.Util.crop(name, Candy.View.getOptions().crop.message.nickname),
 				message: message,
 				time: Candy.Util.localizedTime(timestamp || new Date().toGMTString())
 			});
+      } else {
+        var html = Mustache.to_html(Candy.View.Template.Message.item2, {
+          who: who,
+          name: name,
+          displayName: Candy.Util.crop(name, Candy.View.getOptions().crop.message.nickname),
+          message: message,
+          time: Candy.Util.localizedTime(timestamp || new Date().toGMTString())
+        });
+      }
+
 			self.Room.appendToMessagePane(roomJid, html);
 			var elem = self.Room.getPane(roomJid, '.message-pane').children().last();
 			// click on username opens private chat

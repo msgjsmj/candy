@@ -48,7 +48,7 @@ Candy.View.Template = (function(self){
     //pane: '<div class="room-pane roomtype-{{roomType}}" id="chat-room-{{roomId}}" data-roomjid="{{roomJid}}" data-roomtype="{{roomType}}">{{> roster}}{{> messages}}{{> form}}</div>',
     pane: '<div class="room-pane roomtype-{{roomType}}" id="chat-room-{{roomId}}" data-roomjid="{{roomJid}}" data-roomtype="{{roomType}}">{{> messages}}{{> form}}</div>',
 		subject: '<dt>{{time}}</dt><dd class="subject"><span class="label">{{roomName}}</span>{{_roomSubject}} {{subject}}</dd>',
-		form: '<div class="message-form-wrapper"></div><form method="post" class="message-form"><input name="message" class="field" type="text" autocomplete="off" maxlength="1000" /><input type="submit" class="submit" name="submit" value="{{_messageSubmit}}" /></form>'
+		form: '<div class="message-form-wrapper"></div><form method="post" class="message-form"><input name="message" class="field" type="text" placeholder="Enter를 누르시면 메시지가 전송됩니다:)" autocomplete="off" maxlength="1000" /></form>'
 	};
 
 	self.Roster = {
@@ -57,8 +57,54 @@ Candy.View.Template = (function(self){
 	};
 
 	self.Message = {
-		pane: '<div class="message-pane-wrapper"><dl class="message-pane"></dl></div>',
-		item: '<div class={{owner}}><dt>{{time}}</dt><dd><span class="label"><a href="#" class="name">{{displayName}}</a></span>{{{message}}}</dd></div>'
+		pane: '<div class="message-pane-wrapper"><div class="message-pane"></div></div>',
+		item: '<div class="msg {{who}}">'
+      + '<span class="thmb"><i></i></span>'
+      + '<div class="say">'
+      +   '<span class="thmb"><i></i></span>'
+      +   '<p class="name">{{displayName}}</p>'
+      +   '<div class="bl_pcs">'
+      +     '<div class="blt">'
+      +			  '<i class="bll"></i>'
+      +				'<span class="{{who}}_top"></span>'
+      +       '<i class="blr"></i>'
+      +     '</div>'
+      +     '<div class="blm">'
+      +       '<span>{{message}}</span>'
+      +     '</div>'
+      +     '<div class="blb">'
+      +       '<i class="bll"></i>'
+      +       '<span class="{{who}}_bottom"></span>'
+      +       '<i class="blr"></i>'
+			+			'</div>'
+      +     '<div class="stp">'
+      +       '<em class="time">{{time}}</em>'
+      +     '</div>'
+      +   '</div>'
+      + '</div>'
+      + '</div>',
+      item2: '<div class="msg {{who}}">'
+        + '<div class="say">'
+        +   '<div class="bl_pcs">'
+        +     '<div class="blt">'
+        +			  '<i class="bll"></i>'
+        +				'<span class="{{who}}_top"></span>'
+        +       '<i class="blr"></i>'
+        +     '</div>'
+        +     '<div class="blm">'
+        +       '<span>{{message}}</span>'
+        +     '</div>'
+        +     '<div class="blb">'
+        +       '<i class="bll"></i>'
+        +       '<span class="{{who}}_bottom"></span>'
+        +       '<i class="blr"></i>'
+        +			'</div>'
+        +     '<div class="stp">'
+        +       '<em class="time">{{time}}</em>'
+        +     '</div>'
+        +   '</div>'
+        + '</div>'
+        + '</div>'
   };
 
 	self.Login = {
