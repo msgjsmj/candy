@@ -1623,10 +1623,11 @@ Candy.View.Pane = (function(self, $) {
 			if(!message) {
 				return;
 			}
-
+      console.log(name);
       console.log(receiverName);
       var who = function() {
-        if (receiverName === name) {
+        //if (receiverName === name) {
+        if (name.indexOf("(" + receiverName + ")") != -1){
           return 'my';
         } else {
           return 'ur';
