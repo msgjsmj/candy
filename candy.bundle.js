@@ -281,7 +281,7 @@ Candy.Core = (function(self, Strophe, $) {
 			_connection.disconnect();
 		}
 	};
-	
+
 	/** Function: addHandler
 	 * Wrapper for Strophe.Connection.addHandler() to add a stanza handler for the connection.
 	 *
@@ -542,7 +542,7 @@ Candy.View = (function(self, $) {
 	self.init = function(container, options) {
 		$.extend(true, _options, options);
 		_setupTranslation(_options.language);
-		
+
 		// Set path to emoticons
 		Candy.Util.Parser.setEmoticonPath(this.getOptions().resources + 'img/emoticons/');
 
@@ -624,7 +624,7 @@ Candy.Util = (function(self, $){
 	self.jidToId = function(jid) {
 		return MD5.hexdigest(jid);
 	};
-	
+
 	/** Function: escapeJid
 	 * Escapes a jid (node & resource get escaped)
 	 *
@@ -641,15 +641,15 @@ Candy.Util = (function(self, $){
 		var node = Strophe.escapeNode(Strophe.getNodeFromJid(jid)),
 			domain = Strophe.getDomainFromJid(jid),
 			resource = Strophe.getResourceFromJid(jid);
-			
+
 		jid = node + '@' + domain;
 		if (resource) {
 			jid += '/' + Strophe.escapeNode(resource);
 		}
-		
+
 		return jid;
 	};
-	
+
 	/** Function: unescapeJid
 	 * Unescapes a jid (node & resource get unescaped)
 	 *
@@ -666,12 +666,12 @@ Candy.Util = (function(self, $){
 		var node = Strophe.unescapeNode(Strophe.getNodeFromJid(jid)),
 			domain = Strophe.getDomainFromJid(jid),
 			resource = Strophe.getResourceFromJid(jid);
-		
+
 		jid = node + '@' + domain;
 		if(resource) {
 			jid += '/' + Strophe.unescapeNode(resource);
 		}
-		
+
 		return jid;
 	};
 
@@ -907,7 +907,7 @@ Candy.Util = (function(self, $){
 		 * Use setEmoticonPath() to change it
 		 */
 		_emoticonPath: '',
-		
+
 		/** Function: setEmoticonPath
 		 * Set emoticons location.
 		 *
@@ -1628,7 +1628,7 @@ Candy.Core.ChatUser = function(jid, nick, affiliation, role) {
 		privacyLists: {},
 		customData: {}
 	};
-	
+
 	/** Function: getJid
 	 * Gets an unescaped user jid
 	 *
@@ -1644,7 +1644,7 @@ Candy.Core.ChatUser = function(jid, nick, affiliation, role) {
 		}
 		return;
 	};
-	
+
 	/** Function: getEscapedJid
 	 * Escapes the user's jid (node & resource get escaped)
 	 *
@@ -2165,7 +2165,7 @@ Candy.Core.Event = (function(self, Strophe, $, observable) {
 				self.notifyObservers(self.KEYS.PRESENCE, {'roomJid': roomJid, 'roomName': room.getName(), 'user': user, 'action': action, 'currentUser': Candy.Core.getUser() } );
 				return true;
 			},
-			
+
 			/** Function: PresenceError
 			 * Acts when a presence of type error has been retrieved.
 			 *
@@ -2181,10 +2181,10 @@ Candy.Core.Event = (function(self, Strophe, $, observable) {
 					roomJid = Strophe.getBareJidFromJid(from),
 					room = Candy.Core.getRooms()[roomJid],
 					roomName = room.getName();
-					
+
 				// Presence error: Remove room from array to prevent error when disconnecting
 				delete room;
-				
+
 				self.notifyObservers(self.KEYS.PRESENCE_ERROR, {'msg' : msg, 'type': msg.children('error').children()[0].tagName.toLowerCase(), 'roomJid': roomJid, 'roomName': roomName});
 			},
 
@@ -2289,14 +2289,14 @@ Candy.View.Event = (function(self, $) {
 		onAdminMessage: function(args) {
 			return;
 		},
-		
+
 		/** Function: onDisconnect
 		 * Called when client disconnects
 		 */
 		onDisconnect: function() {
 			return;
 		},
-		
+
 		/** Function: onAuthfail
 		 * Called when authentication fails
 		 */
@@ -2358,7 +2358,7 @@ Candy.View.Event = (function(self, $) {
 		onClose: function(args) {
 			return;
 		},
-		
+
 		/** Function: onPresenceChange
 		 * Called when presence of user changes (kick, ban)
 		 *
@@ -2397,7 +2397,7 @@ Candy.View.Event = (function(self, $) {
 		onContextMenu: function(args) {
 			return {};
 		},
-		
+
 		/** Function: afterContextMenu
 		 * Called when after a the context menu is rendered
 		 *
@@ -2425,7 +2425,7 @@ Candy.View.Event = (function(self, $) {
 		beforeShow: function(args) {
 			return args.message;
 		},
-		
+
 		/** Function: onShow
 		 * Called after a new message has been shown
 		 *
@@ -2435,7 +2435,7 @@ Candy.View.Event = (function(self, $) {
 		onShow: function(args) {
 			return;
 		},
-		
+
 		/** Function: beforeSend
 		 * Called before a message get sent
 		 *
@@ -2611,7 +2611,7 @@ Candy.View.Observer = (function(self, $) {
 			}
 		}
 	};
-	
+
 	/** Class: Candy.View.Observer.PresenceError
 	 * Presence error events
 	 */
@@ -3239,7 +3239,7 @@ Candy.View.Pane = (function(self, $) {
 			 */
 			hide: function(callback) {
 				$('#chat-modal').fadeOut('fast', function() {
-					$('#chat-modal-body').text('');	
+					$('#chat-modal-body').text('');
 					$('#chat-modal-overlay').hide();
 				});
 				// restore initial esc handling
@@ -3334,7 +3334,7 @@ Candy.View.Pane = (function(self, $) {
 					return false;
 				});
 			},
-			
+
 			/** Function: showEnterPasswordForm
 			 * Shows a form for entering room password
 			 *
@@ -3351,18 +3351,18 @@ Candy.View.Pane = (function(self, $) {
 					_joinSubmit: $.i18n._('enterRoomPasswordSubmit')
 				}), true);
 				$('#password').focus();
-				
+
 				// register submit handler
 				$('#enter-password-form').submit(function() {
 					var password = $('#password').val();
-					
+
 					self.Chat.Modal.hide(function() {
 						Candy.Core.Action.Jabber.Room.Join(roomJid, password);
 					});
 					return false;
 				});
 			},
-			
+
 			/** Function: showNicknameConflictForm
 			 * Shows a form indicating that the nickname is already taken and
 			 * for chosing a new nickname
@@ -3377,7 +3377,7 @@ Candy.View.Pane = (function(self, $) {
 					_loginSubmit: $.i18n._('loginSubmit')
 				}));
 				$('#nickname').focus();
-				
+
 				// register submit handler
 				$('#nickname-conflict-form').submit(function() {
 					var nickname = $('#nickname').val();
@@ -3389,7 +3389,7 @@ Candy.View.Pane = (function(self, $) {
 					return false;
 				});
 			},
-			
+
 			/** Function: showError
 			 * Show modal containing error message
 			 *
@@ -4179,9 +4179,9 @@ Candy.View.Pane = (function(self, $) {
 					if(currentUser !== undefined && user.getNick() !== currentUser.getNick() && self.Room.getUser(roomJid)) {
 						// always show join message in private room, even if status messages have been disabled
 						if (self.Chat.rooms[roomJid].type === 'chat') {
-							self.Chat.onInfoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
+							//self.Chat.onInfoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
 						} else {
-							self.Chat.infoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
+							//self.Chat.infoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
 						}
 					}
 				// user is in room but maybe the affiliation/role has changed
@@ -4218,9 +4218,9 @@ Candy.View.Pane = (function(self, $) {
 				self.Roster.leaveAnimation('user-' + roomId + '-' + userId);
 				// always show leave message in private room, even if status messages have been disabled
 				if (self.Chat.rooms[roomJid].type === 'chat') {
-					self.Chat.onInfoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
+					//self.Chat.onInfoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
 				} else {
-					self.Chat.infoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
+					//self.Chat.infoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
 				}
 			// user has been kicked
 			} else if(action === 'kick') {
@@ -4420,7 +4420,7 @@ Candy.View.Template = (function(self){
 			+ '{{#displayPassword}}<label for="password">{{_labelPassword}}</label><input type="password" id="password" name="password" />{{/displayPassword}}'
 			+ '<input type="submit" class="button" value="{{_loginSubmit}}" /></form>'
 	};
-	
+
 	self.PresenceError = {
 		enterPasswordForm: '<strong>{{_label}}</strong>'
 			+ '<form method="post" id="enter-password-form" class="enter-password-form">'

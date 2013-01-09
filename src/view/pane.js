@@ -1618,7 +1618,7 @@ Candy.View.Pane = (function(self, $) {
 		 *   (String) timestamp - [optional] Timestamp of the message, if not present, current date.
 		 */
 		show: function(roomJid, name, message, timestamp, receiverName) {
-			message = Candy.Util.Parser.all(message.substring(0, Candy.View.getOptions().crop.message.body));
+			//message = Candy.Util.Parser.all(message.substring(0, Candy.View.getOptions().crop.message.body));
 			message = Candy.View.Event.Message.beforeShow({'roomJid': roomJid, 'nick': name, 'message': message});
 			if(!message) {
 				return;
