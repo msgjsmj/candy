@@ -1226,7 +1226,7 @@ Candy.View.Pane = (function(self, $) {
 			if (pane) {
 				// IE8 will fail maybe, because the field isn't there yet.
 				try {
-					pane.children('.field')[0].focus();
+//					pane.children('.field')[0].focus();
 				} catch(e) {
 					// fail silently
 				}
@@ -1485,7 +1485,7 @@ Candy.View.Pane = (function(self, $) {
 					if(currentUser !== undefined && user.getNick() !== currentUser.getNick() && self.Room.getUser(roomJid)) {
 						// always show join message in private room, even if status messages have been disabled
 						if (self.Chat.rooms[roomJid].type === 'chat') {
-							self.Chat.onInfoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
+//							self.Chat.onInfoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
 						} else {
 							self.Chat.infoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
 						}
@@ -1524,7 +1524,7 @@ Candy.View.Pane = (function(self, $) {
 				self.Roster.leaveAnimation('user-' + roomId + '-' + userId);
 				// always show leave message in private room, even if status messages have been disabled
 				if (self.Chat.rooms[roomJid].type === 'chat') {
-					self.Chat.onInfoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
+//					self.Chat.onInfoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
 				} else {
 					self.Chat.infoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
 				}
