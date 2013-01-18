@@ -1487,7 +1487,7 @@ Candy.View.Pane = (function(self, $) {
 						if (self.Chat.rooms[roomJid].type === 'chat') {
 //							self.Chat.onInfoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
 						} else {
-							self.Chat.infoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
+//							self.Chat.infoMessage(roomJid, $.i18n._('userJoinedRoom', [user.getNick()]));
 						}
 					}
 				// user is in room but maybe the affiliation/role has changed
@@ -1526,7 +1526,7 @@ Candy.View.Pane = (function(self, $) {
 				if (self.Chat.rooms[roomJid].type === 'chat') {
 //					self.Chat.onInfoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
 				} else {
-					self.Chat.infoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
+//					self.Chat.infoMessage(roomJid, $.i18n._('userLeftRoom', [user.getNick()]));
 				}
 			// user has been kicked
 			} else if(action === 'kick') {
